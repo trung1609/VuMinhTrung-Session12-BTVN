@@ -22,8 +22,6 @@ begin
     if new.quantity > p_stock then
         raise exception 'Hang trong kho khong du';
     end if;
-
-    update luyentap2.products set stock = p_stock - new.quantity where products.product_id = new.product_id;
     return new;
 end;
 $$ language plpgsql;
@@ -35,4 +33,5 @@ create trigger trg_before_insert_products
 execute function luyentap2.before_insert_products();
 
 insert into luyentap2.sales (product_id, quantity)
+
 values (1, 10);
